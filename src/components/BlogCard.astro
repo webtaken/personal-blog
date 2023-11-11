@@ -10,17 +10,20 @@ import {
 
 interface Props {
   title: string;
+  description: string;
   body: string;
   href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, description, body } = Astro.props;
 ---
 
 <Card>
   <CardHeader>
-    <CardTitle>{title}</CardTitle>
-    <CardDescription>{body}</CardDescription>
+    <CardTitle>
+      <a href={href}>{title}</a>
+    </CardTitle>
+    <CardDescription>{description}</CardDescription>
   </CardHeader>
   <CardContent>
     <p>{body}</p>

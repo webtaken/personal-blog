@@ -1,0 +1,40 @@
+---
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { Badge } from "@/components/ui/badge";
+import type { SPConfig } from "@/lib/types";
+
+interface Props {
+  sideProjects: SPConfig[];
+}
+
+const { sideProjects } = Astro.props;
+---
+
+<Card>
+  <CardHeader>
+    <CardTitle>Side projects</CardTitle>
+    <CardDescription>List of side projects</CardDescription>
+  </CardHeader>
+  <CardContent>
+    {
+      sideProjects.map((sp) => {
+        return (
+          <div>
+            <a href={sp.url} class="text-base font-semibold">
+              {sp.title}
+            </a>
+            <p class="text-sm">{sp.description}</p>
+            <Badge>{sp.status}</Badge>
+          </div>
+        );
+      })
+    }
+  </CardContent>
+</Card>

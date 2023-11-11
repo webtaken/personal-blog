@@ -2,8 +2,18 @@
 import "@/styles/globals.css";
 
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/BlogCard.astro";
 import BlogCard from "../components/BlogCard.astro";
+import SideProjectsCard from "@/components/SideProjectsCard.astro";
+import type { SPConfig } from "@/lib/types";
+
+const sideProjects: SPConfig[] = [
+  {
+    title: "GPTube",
+    description: "AI powered agents to your YT channel",
+    url: "/side-projects/gptube",
+    status: "launched 🚀",
+  },
+];
 ---
 
 <Layout title="Welcome to Astro.">
@@ -23,12 +33,18 @@ import BlogCard from "../components/BlogCard.astro";
   </p>
   <div class="mt-8">
     <h1 class="text-4xl font-sans">Latest blogs</h1>
-    <div class="my-4 grid grid-cols-4 gap-8">
-      <BlogCard title="blog post" body="the body" href="/blog/first" />
-      <BlogCard title="blog post" body="the body" href="/blog/first" />
-      <BlogCard title="blog post" body="the body" href="/blog/first" />
-      <BlogCard title="blog post" body="the body" href="/blog/first" />
+    <div class="my-4 grid grid-cols-4">
+      <div class="col-span-3 grid grid-cols-3">
+        <BlogCard
+          title="blog post"
+          description="first blog post"
+          body="the body"
+          href="/blog/first"
+        />
+      </div>
+      <div class="col-span-1">
+        <SideProjectsCard sideProjects={sideProjects} />
+      </div>
     </div>
-    <h1 class="text-4xl">Side projects</h1>
   </div>
 </Layout>
