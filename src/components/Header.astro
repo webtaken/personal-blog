@@ -1,0 +1,37 @@
+---
+const leftRoutes = [
+  { url: "/", text: "Home" },
+  { url: "/blog", text: "Blog" },
+  { url: "/side-projects", text: "Side Projects" },
+];
+
+const rightRoutes = [
+  { url: "https://twitter.com/node_srojas1", text: "Twitter" },
+  { url: "https://github.com/webtaken", text: "Github" },
+  {
+    url: "https://www.linkedin.com/in/saul-rojas-6885b1188/",
+    text: "LinkedIn",
+  },
+];
+---
+
+<nav class="flex justify-between px-10 py-5">
+  <div class="flex text-foreground gap-4">
+    {
+      leftRoutes.map((route) => (
+        <a href={route.url} class="px-2 rounded hover:font-bold">
+          {route.text}
+        </a>
+      ))
+    }
+  </div>
+  <div class="flex">
+    {
+      rightRoutes.map((route) => (
+        <a href={route.url} class="px-2 rounded hover:font-bold">
+          {route.text}
+        </a>
+      ))
+    }
+  </div>
+</nav>
