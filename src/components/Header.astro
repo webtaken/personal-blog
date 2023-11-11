@@ -28,7 +28,11 @@ const rightRoutes = [
   <div class="flex">
     {
       rightRoutes.map((route) => (
-        <a href={route.url} class="px-2 rounded hover:font-bold">
+        <a
+          href={route.url}
+          target="_blank"
+          class="px-2 rounded hover:font-bold"
+        >
           {route.text}
         </a>
       ))

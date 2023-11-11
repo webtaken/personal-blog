@@ -2,7 +2,33 @@
 import "@/styles/globals.css";
 
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import Card from "../components/BlogCard.astro";
+import BlogCard from "../components/BlogCard.astro";
 ---
 
-<Layout title="Welcome to Astro." />
+<Layout title="Welcome to Astro.">
+  <h1 class="text-6xl font-bold">I'm Saul</h1>
+  <br />
+  <p class="w-2/3">
+    Hello there my name is Saul. I'm a web developer and a partial time <span
+      class="font-bold text-foreground underline"
+      ><a href="https://twitter.com/IndieCreatorsHQ">Indie Creator</a></span
+    >, I enjoy doing projects and launching them 🚀. That's why I created this
+    personal blog where you could find useful resources if you're a developer,
+    solo-preneur or just a guy who likes to do stuff on your free times; to
+    leverage your knowledge to the next level.
+    <br />
+     Hope you'll enjoy the content and please follow me on my social networks if
+    you want.
+  </p>
+  <div class="mt-8">
+    <h1 class="text-4xl font-sans">Latest blogs</h1>
+    <div class="my-4 grid grid-cols-4 gap-8">
+      <BlogCard title="blog post" body="the body" href="/blog/first" />
+      <BlogCard title="blog post" body="the body" href="/blog/first" />
+      <BlogCard title="blog post" body="the body" href="/blog/first" />
+      <BlogCard title="blog post" body="the body" href="/blog/first" />
+    </div>
+    <h1 class="text-4xl">Side projects</h1>
+  </div>
+</Layout>
