@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import ProfileImage from "../assets/images/profile.jpg";
 import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
 import SideProjectsCard from "@/components/SideProjectsCard.astro";
@@ -41,7 +40,7 @@ export const sideProjects: SPConfig[] = [
       if you want.
     </p>
     <Image
-      src={ProfileImage}
+      src={import("../assets/images/profile.jpg")}
       alt="profile_image"
       class="rounded-full w-40 h-40 mx-auto"
     />
