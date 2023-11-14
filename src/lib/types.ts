@@ -1,6 +1,6 @@
 export interface SPConfig {
-    title: string;
-    description: string;
-    url: string;
-    status: "in progress 🔨" | "launched 🚀";
+  title: string;
+  description: string;
+  url: string;
+  status: "in progress 🔨" | "launched 🚀";
 }

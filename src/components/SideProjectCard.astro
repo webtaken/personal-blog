@@ -1,0 +1,40 @@
+---
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Icon from "astro-icon";
+import { Badge } from "@/components/ui/badge";
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  status: string;
+}
+
+const { url, title, description, status } = Astro.props;
+---
+
+<Card className="min-w-full hover:shadow-lg">
+  <CardHeader>
+    <CardTitle>
+      <a
+        href={url}
+        class="flex items-center gap-1 hover:underline"
+        target="_blank"
+        >{title} <Icon name="ic:round-launch" class="w-6 h-6" /></a
+      >
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p>{description}</p>
+  </CardContent>
+  <CardFooter>
+    {status}
+  </CardFooter>
+</Card>

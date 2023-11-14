@@ -1,7 +1,23 @@
 ---
+import SideProjectsCard from "@/components/SideProjectsCard.astro";
 import Layout from "../../layouts/Layout.astro";
+import SideProjectCard from "@/components/SideProjectCard.astro";
+import { sideProjects } from "../index.astro";
 ---
 
 <Layout title="side-projects">
-  <p>My side projects</p>
+  <h1 class="text-5xl font-bold">My side projects</h1>
+  <p class="py-4">Here I'll show my current side projects.</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+    {
+      sideProjects.map((sideProject) => (
+        <SideProjectCard
+          title={sideProject.title}
+          description={sideProject.description}
+          url={sideProject.url || "/side-projects"}
+          status={sideProject.status}
+        />
+      ))
+    }
+  </div>
 </Layout>

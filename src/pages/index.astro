@@ -3,18 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
 import SideProjectsCard from "@/components/SideProjectsCard.astro";
 import type { SPConfig } from "@/lib/types";
+let latestPosts = await Astro.glob("./blog-posts/*.md");
+latestPosts = latestPosts.slice(0, 4);
 
-const sideProjects: SPConfig[] = [
+export const sideProjects: SPConfig[] = [
   {
-    title: "GPTube",
+    title: "GPTube 😺",
     description: "AI powered agents to your YT channel",
-    url: "/side-projects/gptube",
+    url: "https://www.gptube.ink/",
     status: "launched 🚀",
   },
   {
     title: "Inventory 📦",
     description: "Notion template to manage your store",
-    url: "/side-projects/inventory",
+    url: "https://www.inventory.lat/",
     status: "launched 🚀",
   },
 ];
@@ -37,15 +39,21 @@ const sideProjects: SPConfig[] = [
   </p>
   <div class="mt-8">
     <h1 class="text-4xl font-sans">Latest blogs</h1>
-    <div class="my-4 grid grid-cols-4">
-      <div class="col-span-3 grid grid-cols-3">
-        <BlogCard
-          title="blog post"
-          description="first blog post"
-          body="the body"
-          url="/blog/first"
-          tags={["blogging"]}
-        />
+    <div class="my-4 grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div
+        class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2"
+      >
+        {
+          latestPosts.map((post) => (
+            <BlogCard
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              body={post.frontmatter.descriptionExtended}
+              url={post.url || "/"}
+              tags={post.frontmatter.tags}
+            />
+          ))
+        }
       </div>
       <div class="col-span-1">
         <SideProjectsCard sideProjects={sideProjects} />
