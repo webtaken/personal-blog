@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
@@ -12,6 +12,10 @@ export default defineConfig({
     }),
     react(),
   ],
-  output: "server",
+  output: "hybrid",
   adapter: vercel(),
+  site: "https://www.saul-rojas-dev.blog/",
+  image: {
+    service: passthroughImageService(),
+  },
 });
