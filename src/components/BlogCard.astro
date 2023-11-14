@@ -7,28 +7,39 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Icon from "astro-icon";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   title: string;
   description: string;
   body: string;
-  href: string;
+  url: string;
+  tags: string[];
 }
 
-const { href, title, description, body } = Astro.props;
+const { url, title, description, body, tags } = Astro.props;
 ---
 
-<Card>
+<Card className="min-w-full hover:shadow-lg">
   <CardHeader>
     <CardTitle>
-      <a href={href}>{title}</a>
+      <a href={url} class="flex items-center gap-1 hover:underline"
+        >{title} <Icon name="mdi:link-variant" class="w-6 h-6" /></a
+      >
     </CardTitle>
     <CardDescription>{description}</CardDescription>
   </CardHeader>
   <CardContent>
     <p>{body}</p>
   </CardContent>
-  <CardFooter>
-    <p>Card Footer</p>
-  </CardFooter>
+  {
+    tags && (
+      <CardFooter>
+        {tags.map((tag) => (
+          <Badge variant="secondary">{tag}</Badge>
+        ))}
+      </CardFooter>
+    )
+  }
 </Card>

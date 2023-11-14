@@ -1,6 +1,4 @@
 ---
-import "@/styles/globals.css";
-
 import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
 import SideProjectsCard from "@/components/SideProjectsCard.astro";
@@ -13,10 +11,16 @@ const sideProjects: SPConfig[] = [
     url: "/side-projects/gptube",
     status: "launched 🚀",
   },
+  {
+    title: "Inventory 📦",
+    description: "Notion template to manage your store",
+    url: "/side-projects/inventory",
+    status: "launched 🚀",
+  },
 ];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="home">
   <h1 class="text-6xl font-bold">I'm Saul</h1>
   <br />
   <p class="w-2/3">
@@ -39,7 +43,8 @@ const sideProjects: SPConfig[] = [
           title="blog post"
           description="first blog post"
           body="the body"
-          href="/blog/first"
+          url="/blog/first"
+          tags={["blogging"]}
         />
       </div>
       <div class="col-span-1">

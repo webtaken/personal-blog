@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+let posts = await Astro.glob("../blog-posts/*.md");
+posts.sort((a, b) =>
+  a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate)
+);
+---
+
+<Layout title="blog">
+  <h1 class="text-5xl font-bold">My Blog Posts</h1>
+  <p class="py-4">Feel free to check my recent posts.</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+    {
+      posts.map((post) => (
+        <BlogCard
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          body={post.frontmatter.descriptionExtended}
+          url={post.url || "/blog"}
+          tags={post.frontmatter.tags}
+        />
+      ))
+    }
+  </div>
+</Layout>

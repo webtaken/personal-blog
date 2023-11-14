@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import Icon from "astro-icon";
+
 import { Badge } from "@/components/ui/badge";
 import type { SPConfig } from "@/lib/types";
 
@@ -26,12 +28,17 @@ const { sideProjects } = Astro.props;
     {
       sideProjects.map((sp) => {
         return (
-          <div>
-            <a href={sp.url} class="text-base font-semibold">
+          <div class="mt-2">
+            <a
+              href={sp.url}
+              class="text-base font-semibold flex items-center gap-1 hover:underline"
+            >
+              <Icon name="ic:outline-insert-link" class="w-5 h-5" />
               {sp.title}
             </a>
+
             <p class="text-sm">{sp.description}</p>
-            <Badge>{sp.status}</Badge>
+            <Badge variant="secondary">{sp.status}</Badge>
           </div>
         );
       })

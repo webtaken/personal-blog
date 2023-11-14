@@ -1,41 +1,38 @@
 ---
-const leftRoutes = [
+import Icon from "astro-icon";
+
+const routes = [
   { url: "/", text: "Home" },
   { url: "/blog", text: "Blog" },
   { url: "/side-projects", text: "Side Projects" },
-];
-
-const rightRoutes = [
-  { url: "https://twitter.com/node_srojas1", text: "Twitter" },
-  { url: "https://github.com/webtaken", text: "Github" },
-  {
-    url: "https://www.linkedin.com/in/saul-rojas-6885b1188/",
-    text: "LinkedIn",
-  },
 ];
 ---
 
 <nav class="flex justify-between px-10 py-5">
   <div class="flex text-foreground gap-4">
     {
-      leftRoutes.map((route) => (
+      routes.map((route) => (
         <a href={route.url} class="px-2 rounded hover:font-bold">
           {route.text}
         </a>
       ))
     }
   </div>
-  <div class="flex">
-    {
-      rightRoutes.map((route) => (
-        <a
-          href={route.url}
-          target="_blank"
-          class="px-2 rounded hover:font-bold"
-        >
-          {route.text}
-        </a>
-      ))
-    }
+  <div class="flex gap-3">
+    <a
+      class="flex items-center gap-2 hover:font-bold"
+      href="https://twitter.com/node_srojas1"
+      target="_blank"><Icon name="cib:twitter" class="w-4 h-4" /> Twitter</a
+    >
+    <a
+      class="flex items-center gap-2 hover:font-bold"
+      href="https://github.com/webtaken"
+      target="_blank"><Icon name="cib:github" class="w-4 h-4" /> Github</a
+    >
+    <a
+      class="flex items-center gap-2 hover:font-bold"
+      href="https://www.linkedin.com/in/saul-rojas-6885b1188/"
+      target="_blank"><Icon name="cib:linkedin" class="w-4 h-4" /> LinkedIn</a
+    >
   </div>
 </nav>
