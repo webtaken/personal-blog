@@ -7,14 +7,14 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title}>
   <h1 class="font-bold text-5xl text-center">{frontmatter.title}</h1>
-  <p class="text-center text-base">
+  <p class="text-center text-base pt-2">
     by <a class="underline hover:font-semibold" href={frontmatter.authorURL}
       >{frontmatter.author}</a
     > |
     <span class="font-bold">{formatDate(frontmatter.pubDate)}</span>
   </p>
   <br />
-  <div class="prose max-w-fit md:prose-lg lg:prose-xl dark:prose-invert">
+  <div class="prose max-w-fit md:prose-md lg:prose-lg dark:prose-invert">
     <slot />
   </div>
 </Layout>
