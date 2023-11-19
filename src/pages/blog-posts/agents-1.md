@@ -17,7 +17,7 @@ OpenAI has launched <a href="https://openai.com/blog/introducing-gpts" target="_
 
 In this post as Indie Creators, we will ride the wave to gather inspiration for potential use cases, fostering the creation of new side projects through this emerging technology. So our use case will be to create a **personal coding interview coach** that will help _**Ryan Gosling:** a junior software developer that is preparing himself for its next coding interview_ to get a job at an important software company.
 
-<h1 id="creating-the-assistant">Creating the assistant <a href="#creating-the-assistant">🔗</a></h1>
+<h1 id="creating-the-assistant">Creating the assistant <a href="#creating-the-assistant">#</a></h1>
 
 First we'll need to create a new assistant. You can create one from the new [Assistants playground](https://platform.openai.com/playground?mode=assistant) in OpenAI's platform or using the new OpenAI's [Assistants API](https://platform.openai.com/docs/api-reference/assistants). We'll use the OpenAI Assistants API using the official [python SDK](https://github.com/openai/openai-python).  
 So here is the code for creating our assistant, take attention in the initial instruction.
@@ -41,7 +41,7 @@ assistant = client.beta.assistants.create(
 You will see your new assistant created on the [OpenAI's platform](https://platform.openai.com/assistants).  
 The initial instruction is the behavior of our Assistant. We are telling it that its existence reason is coaching a junior dev in coding interviews. We also indicated it some tasks.
 
-<h1 id="starting-chat">Starting a new chat with the assistant<a href="#starting-chat">🔗</a></h1>
+<h1 id="starting-chat">Starting a new chat with the assistant <a href="#starting-chat">#</a></h1>
 
 In Assistants API a conversation is called a **thread**. The next step is to create a new thread to chat with our assistant.
 
@@ -69,7 +69,7 @@ print(message.json())
 
 The message was added to the thread but the assistant hasn't answered anything yet we need to run the assistant.
 
-<h1 id="chatting">Chatting with the assistant<a href="#chatting">🔗</a></h1>
+<h1 id="chatting">Chatting with the assistant <a href="#chatting">#</a></h1>
 
 To receive an answer from the assistant we will run the assistant explicitly. So we create a new `Run` object.
 
@@ -125,7 +125,7 @@ for message in reversed(messages.data):
 We can see that our assistant has answered us with a very easy problem find the maximum number
 in an array of numbers.
 
-<h1 id="solving-the-problem">Solving the problem<a href="#solving-the-problem">🔗</a></h1>
+<h1 id="solving-the-problem">Solving the problem <a href="#solving-the-problem">#</a></h1>
 
 So now we will send our solution to the assistant. The solution will be in python, and the assistant with its integrated [code interpreter tool](https://platform.openai.com/docs/assistants/tools/code-interpreter) will evaluate if our solution is correct.
 
@@ -183,7 +183,11 @@ print(f"{messages.data[0].role}: {messages.data[0].content[0].text.value}")
 
 So our code passed all the tests and our answer seems to be correct.
 
-<h1 id="side-project-idea">Side project idea<a href="#side-project-idea">💡</a></h1>
+<h1 id="code">Source Code <a href="#code">#</a></h1>
+
+You can find the source code for this example on: [source code](https://github.com/webtaken/AI-scripts/blob/main/agents/coding-interview-coach.ipynb).
+
+<h1 id="side-project-idea">Side project idea <a href="#side-project-idea">#</a></h1>
 
 So we have built a basic coding interview coach that needs to be improved a lot to become a decent competition to existing products such as [Leetcode](https://leetcode.com/) for example.  
 The basic idea for now is to create a newsletter sending an easy-to-intermediate problem each day to our users by email. With a basic monthly subscription plan we can train a junior dev to tackle its next coding interview. The challenge here is answer the argument: **And what's the difference with other similar sites man 🧐?, there are a lot even for free** (we have to solve that issue).  
