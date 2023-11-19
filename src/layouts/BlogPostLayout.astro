@@ -14,7 +14,7 @@ const { frontmatter } = Astro.props;
     <span class="font-bold">{formatDate(frontmatter.pubDate)}</span>
   </p>
   <br />
-  <div class="prose max-w-fit md:prose-lg lg:prose-xl dark:prose-invert">
+  <div class="prose max-w-fit md:prose-md lg:prose-lg dark:prose-invert">
     <slot />
   </div>
 </Layout>
