@@ -3,8 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 
 let posts = await Astro.glob("../blog-posts/*.md");
-posts.sort((a, b) =>
-  a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate)
+posts.sort(
+  (a, b) => -a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate)
 );
 ---
 

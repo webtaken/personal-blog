@@ -7,9 +7,6 @@ description: "My first blog post"
 descriptionExtended: "This is my first blog post explaining what is about the blog and inviting you to read more posts."
 author: "Saul Rojas"
 authorURL: "https://www.linkedin.com/in/saul-rojas-6885b1188/"
-image:
-  url: "https://docs.astro.build/assets/full-logo-light.png"
-  alt: "First post"
 tags: ["blogging"]
 ---
 

@@ -6,6 +6,9 @@ import BlogCard from "../components/BlogCard.astro";
 import SideProjectsCard from "@/components/SideProjectsCard.astro";
 import type { SPConfig } from "@/lib/types";
 let latestPosts = await Astro.glob("./blog-posts/*.md");
+latestPosts.sort(
+  (a, b) => -a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate)
+);
 latestPosts = latestPosts.slice(0, 4);
 
 export const sideProjects: SPConfig[] = [
@@ -48,7 +51,7 @@ export const sideProjects: SPConfig[] = [
   </div>
 
   <div class="mt-8">
-    <h1 class="text-4xl font-sans">Latest blogs</h1>
+    <h1 class="text-4xl font-sans">Latest Posts</h1>
     <div class="my-4 grid grid-cols-1 md:grid-cols-3 gap-2">
       <div
         class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2"

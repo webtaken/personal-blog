@@ -35,7 +35,7 @@ const { url, title, description, body, tags } = Astro.props;
   </CardContent>
   {
     tags && (
-      <CardFooter>
+      <CardFooter className="flex flex-wrap gap-1">
         {tags.map((tag) => (
           <Badge variant="secondary">{tag}</Badge>
         ))}

@@ -1,21 +1,23 @@
 ---
 layout: ../../layouts/BlogPostLayout.astro
-id: post-2
-title: "Your personal coding interview coach (AI agent)"
-pubDate: 2023-11-19T14:52:00Z
-description: "Build your personal programming interview coach AI agent with new OpenAI GPTs"
-descriptionExtended: "In this post I'll show you the power of new OpenAI agents to build your own coding interview coach to prepare yourself to get a new job"
+id: post-3
+title: "Hugging Face 🤗: Low cost AI models to boost your side project"
+pubDate: 2023-11-23T23:47:00Z
+description: "Boost your side project with AI models from the largest AI community around the world"
+descriptionExtended: "In this post I'll show you how to boost your side project with AI models from hugging face, the largest internet repository of AI models."
 author: "Saul Rojas"
 authorURL: "https://www.linkedin.com/in/saul-rojas-6885b1188/"
 image:
-  url: "https://images.openai.com/blob/2014517b-1a80-4b62-bbb6-caa490f69299/introducing-gpts.png?trim=0,0,0,0&width=1400"
-  alt: "OpenAI GPTs"
-tags: ["blogging", "AI", "OpenAI"]
+  url: "https://huggingface.co/front/thumbnails/v2-2.png"
+  alt: "Hugging Face"
+tags: ["blogging", "side-projects", "AI", "Hugging Face"]
 ---
 
-OpenAI has launched <a href="https://openai.com/blog/introducing-gpts" target="_blank">GPTs</a> its new feature that promise to change the game in how AI products are built today. This innovative offering promises to empower individuals globally, granting them the ability to effortlessly create their own personalized agents 🤖. This democratization of AI not only marks a significant shift in accessibility but also signals a departure from traditional models of development. With GPTs, OpenAI has opened the door for every person in the world to actively participate in shaping the future of artificial intelligence, fostering a new era of creativity, customization, and widespread engagement with this cutting-edge technology.
-
-In this post as Indie Creators, we will ride the wave to gather inspiration for potential use cases, fostering the creation of new side projects through this emerging technology. So our use case will be to create a **personal coding interview coach** that will help _**Ryan Gosling:** a junior software developer that is preparing himself for its next coding interview_ to get a job at an important software company.
+With the hype of AI <a href="https://huggingface.co/" target="_blank">Hugging Face 🤗</a> has
+become one of the trending companies related to this field. Is known as the github of AI for
+its particular way of making AI open source and also because of the massive amount of models
+hosted on it.  
+Literally in this place you can find any model related to the most common fields in AI:
 
 <h1 id="creating-the-assistant">Creating the assistant <a href="#creating-the-assistant">#</a></h1>
 

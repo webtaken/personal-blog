@@ -14,6 +14,15 @@ const { frontmatter } = Astro.props;
     <span class="font-bold">{formatDate(frontmatter.pubDate)}</span>
   </p>
   <br />
+  {
+    frontmatter.image && (
+      <img
+        class="object-cover border p-2 rounded-lg mx-auto mb-2 w-3/4 h-80"
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+      />
+    )
+  }
   <div class="prose max-w-fit md:prose-md lg:prose-lg dark:prose-invert">
     <slot />
   </div>
