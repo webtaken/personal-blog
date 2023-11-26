@@ -13,187 +13,144 @@ image:
 tags: ["blogging", "side-projects", "AI", "Hugging Face"]
 ---
 
-With the hype of AI <a href="https://huggingface.co/" target="_blank">Hugging Face 🤗</a> has
+With the hype of **#AI** <a href="https://huggingface.co/" target="_blank">Hugging Face 🤗</a> has
 become one of the trending companies related to this field. Is known as the github of AI for
 its particular way of making AI open source and also because of the massive amount of models
 hosted on it.  
-Literally in this place you can find any model related to the most common fields in AI:
+Literally in this place you can find any model related to the most common tasks in AI:
 
-<h1 id="creating-the-assistant">Creating the assistant <a href="#creating-the-assistant">#</a></h1>
+- Multimodal: Text-to-image and reverse generation, Image captioning, visual question answering...
+- Computer Vision: Image classification, Object detection, Depth estimation...
+- NLP: Text generation, Summarization, Sentiment analysis, Translation, Dialog systems...
+- Audio: Text-to-speech, Speech-to-text, Speaker identification...
 
-First we'll need to create a new assistant. You can create one from the new [Assistants playground](https://platform.openai.com/playground?mode=assistant) in OpenAI's platform or using the new OpenAI's [Assistants API](https://platform.openai.com/docs/api-reference/assistants). We'll use the OpenAI Assistants API using the official [python SDK](https://github.com/openai/openai-python).  
-So here is the code for creating our assistant, take attention in the initial instruction.
+But for me the real power of Hugging Face and its huge amount of models is that you can use them using a simple API call!
+<a href="https://huggingface.co/inference-endpoints" target="_blank">Inference Endpoints</a> is a service that let you use different models deployed on Hugging Face infrastructure only making a simple API call using a token.  
+So let's start with setup process and see how you can start integrating AI models as features
+is your side project
 
-```python
-instructions = """You are an experienced coding interview coach that will help a junior software
-developer for an interview. Your main tasks will be:
-- Give problems on most common topics in coding interviews and return some examples.
-- When asked to evaluate a solution (in any programming language) for a problem, evaluate the
-  correctness of the solution running the code over a sample of inputs."""
+<h1 id="setup">Getting Setup <a href="#setup">#</a></h1>
 
-# Creating the assistant
-assistant = client.beta.assistants.create(
-    name="Personal Coding Interview Coach",
-    instructions=instructions,
-    model="gpt-3.5-turbo",
-    tools=[{"type": "code_interpreter"}]
-)
-```
+So to start first <a href="https://huggingface.co/join">create a Hugging Face Account</a>.  
+Once you're logged in explore the <a href="https://huggingface.co/models">models</a> section where you'll find the most popular models shared on the platform.  
+You can filter then by tasks, libraries, datasets, languages, licenses, etc. But the most important filter for us right now is the _Tasks_ filter.  
+So to start our models exploration let's pick the models related to NLP for **Sentiment Analysis**.
 
-You will see your new assistant created on the [OpenAI's platform](https://platform.openai.com/assistants).  
-The initial instruction is the behavior of our Assistant. We are telling it that its existence reason is coaching a junior dev in coding interviews. We also indicated it some tasks.
+<h1 id="sentiment-analysis">Sentiment Analysis <a href="#sentiment-analysis">#</a></h1>
 
-<h1 id="starting-chat">Starting a new chat with the assistant <a href="#starting-chat">#</a></h1>
+First of all let's explore the sentiments analysis models, let's take for example the
+<a href="https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student" target="_blank">distilbert</a> model that classifies a text if it's negative, neutral or positive.
+Simple and easy just use the widget attached on Inference API to make a quick test and you'll receive a response in seconds.
 
-In Assistants API a conversation is called a **thread**. The next step is to create a new thread to chat with our assistant.
+![Inference API Widget](../../assets/images/blogs/post-3/inference-api-widget.webp)
 
-```python
-thread = client.beta.threads.create()
-print(thread)
-# Output: Thread(id='thread_JBmhDZmLqjVOZf09h9YbwpN1', created_at=1700410886, metadata={}, object='thread')
-```
+Ok that's cool but let's go to the point of this post.
 
-We created a new conversation, the sdk will return thread's properties, the most important information is the **thread id** on which we'll push messages.
+<h1 id="inference-api">Inference API <a href="#inference-api">#</a></h1>
 
-> **Note:** A thread handles automatically the window size, so you don't have to worry about how many messages you send to it. OpenAI will fit automatically the entire chat with the context window of your selected model.
+First let's setup a token to use Inference API to do that <a href="https://huggingface.co/settings/tokens" target="_blank">go into your Hugging Face profile settings</a> and generate a new API.
+You should see a token hf_xxxxx (old tokens are api_XXXXXXXX or api_org_XXXXXXX).  
+Now let's go back to the <a href="https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student" target="_blank">distilbert</a> model page
+and test out if our token works correctly, you'll see a section with various options
 
-Now we'll push a message to the new chat, to do this we have to [create a new message](https://platform.openai.com/docs/api-reference/messages/createMessage) and add it to the thread.
+![Options](../../assets/images/blogs/post-3/options.webp)
 
-```python
-message = client.beta.threads.messages.create(
-    thread_id=thread.id,
-    role="user",
-    content="Give me an easy problem with arrays"
-)
-print(message.json())
-# Output: {"id": "msg_m79VrxSgSiSNcFJJXD3Ort8Q", "assistant_id": null, "content": [{"text": {"annotations": [], "value": "Give me an easy problem with arrays"}, "type": "text"}], "created_at": 1700412050, "file_ids": [], "metadata": {}, "object": "thread.message", "role": "user", "run_id": null, "thread_id": "thread_JBmhDZmLqjVOZf09h9YbwpN1"}
-```
-
-The message was added to the thread but the assistant hasn't answered anything yet we need to run the assistant.
-
-<h1 id="chatting">Chatting with the assistant <a href="#chatting">#</a></h1>
-
-To receive an answer from the assistant we will run the assistant explicitly. So we create a new `Run` object.
+Select Deploy and then the option **Inference API**, you'll see a panel with examples from
+python, javascript and CURL, pick whatever you want. I'll choose python to test it with code.
 
 ```python
-run = client.beta.threads.runs.create(
-    thread_id=thread.id,
-    assistant_id=assistant.id,
-    instructions="Please address the user as Ryan Gosling. The user has a premium account."
-)
-print(run)
-# Output: Run(id='run_A9EMAXzrgUgSSJkyuVKaF59w', assistant_id='asst_YVgo81fA4z8uZSCeKGhpABtz', cancelled_at=None, completed_at=None, created_at=1700412670, expires_at=1700413270, failed_at=None, file_ids=[], instructions='Please address the user as Ryan Gosling. The user has a premium account.', last_error=None, metadata={}, model='gpt-3.5-turbo', object='thread.run', required_action=None, started_at=None, status='queued', thread_id='thread_JBmhDZmLqjVOZf09h9YbwpN1', tools=[ToolAssistantToolsCode(type='code_interpreter')])
+import os
+from dotenv import load_dotenv
+import requests
+import json
+
+load_dotenv()
+
+TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
+API_URL = "https://api-inference.huggingface.co/models/lxyuan/distilbert-base-multilingual-cased-sentiments-student"
+headers = {"Authorization": f"Bearer {TOKEN}"}
+
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()
+
+output = query({
+	"inputs": "I like you. I love you",
+})
+
+print(json.dumps(output, indent=2, default=str))
 ```
 
-We pass the **thread id** and the **assistant id**, you can pass as well additional instructions to have a more personalized response. In this case we say that our user is Ryan Gosling our junior dev chad that has a premium account in our side project.  
-By default the Run object starts with the `queue` status. You can periodically retrieve the Run to check on its status to see if it has moved to `completed`.
+That outputs
+
+```json
+[
+  [
+    {
+      "label": "positive",
+      "score": 0.9725496172904968
+    },
+    {
+      "label": "neutral",
+      "score": 0.018842175602912903
+    },
+    {
+      "label": "negative",
+      "score": 0.008608155883848667
+    }
+  ]
+]
+```
+
+> Note: some models need to be loaded before sending any response so you could receive an initial error `model loading...`.
+
+We could also send a list of messages to make the process in batch.
 
 ```python
-run = client.beta.threads.runs.retrieve(
-  thread_id=thread.id,
-  run_id=run.id
-)
-print(run)
-# Output: Run(id='run_A9EMAXzrgUgSSJkyuVKaF59w', assistant_id='asst_YVgo81fA4z8uZSCeKGhpABtz', cancelled_at=None, completed_at=1700412674, created_at=1700412670, expires_at=None, failed_at=None, file_ids=[], instructions='Please address the user as Ryan Gosling. The user has a premium account.', last_error=None, metadata={}, model='gpt-3.5-turbo', object='thread.run', required_action=None, started_at=1700412670, status='completed', thread_id='thread_JBmhDZmLqjVOZf09h9YbwpN1', tools=[ToolAssistantToolsCode(type='code_interpreter')])
+output = query({
+	"inputs": ["I like you. I love you", "I hate you", "Hope everything goes well"],
+})
 
+print(json.dumps(output, indent=2, default=str))
 ```
 
-After retrieving the Run object and check that it passes to `completed` status we can retrieve all the messages in the thread.
+Outputs:
 
-```python
-messages = client.beta.threads.messages.list(
-  thread_id=thread.id
-)
-# Printing from oldest messages to the newest ones
-for message in reversed(messages.data):
-    print(f"{message.role}: {message.content[0].text.value}")
-
-# Output:
-# user: Give me an easy problem with arrays
-# user: Give me an easy problem with arrays
-# assistant: Sure, how about this:
-
-# Problem: Find the maximum element in an array.
-
-# Write a function `find_max(arr)` that takes in an array `arr` as input and returns the maximum element in the array.
-
-# For example, given the input array `[3, 9, 2, 5, 1]`, the function should return `9` since `9` is the largest element in the array.
-
-# To solve this problem, you can initialize a variable `max_num` to the first element of the array. Then, iterate through the remaining elements of the array and update `max_num` if you find a larger number.
-
-# Please go ahead and write the code to solve this problem.
+```json
+[
+  [
+    {
+      "label": "positive",
+      "score": 0.9725496172904968
+    },
+    {
+      "label": "neutral",
+      "score": 0.018842175602912903
+    },
+    {
+      "label": "negative",
+      "score": 0.008608155883848667
+    }
+  ],
+  [
+    {
+      "label": "negative",
+      "score": 0.8973513245582581
+    },
+    {
+      "label": "positive",
+      "score": 0.06305788457393646
+    },
+    {
+...
+      "score": 0.07286641001701355
+    }
+  ]
+]
 ```
 
-We can see that our assistant has answered us with a very easy problem find the maximum number
-in an array of numbers.
+You can test API inference endpoints with various other models in the platform depending on your needs.
 
-<h1 id="solving-the-problem">Solving the problem <a href="#solving-the-problem">#</a></h1>
+<h1 id="restrictions">Restrictions <a href="#restrictions">#</a></h1>
 
-So now we will send our solution to the assistant. The solution will be in python, and the assistant with its integrated [code interpreter tool](https://platform.openai.com/docs/assistants/tools/code-interpreter) will evaluate if our solution is correct.
-
-```python
-answer = """Here is my answer in python code is it right?:
-`
-def find_max(arr):
-  if len(arr) == 0:
-    return
-  maximum = arr[0]
-  for num in arr:
-    if num > maximum:
-      maximum = num
-  return maximum
-`
-"""
-message = client.beta.threads.messages.create(
-    thread_id=thread.id,
-    role="user",
-    content=answer
-)
-
-run = client.beta.threads.runs.create(
-    thread_id=thread.id,
-    assistant_id=assistant.id,
-    instructions="Please evaluate this code, test it with corner cases as well."
-)
-```
-
-> Note: I passed the code in text but the code interpreter tool allows you to upload a file to evaluate your answer. We'll do it in future posts.
-
-We wait until the Run status passes to `completed` and then check the assistant last response.
-
-```python
-messages = client.beta.threads.messages.list(
-  thread_id=thread.id
-)
-
-# Printing the last response from the assistant
-print(f"{messages.data[0].role}: {messages.data[0].content[0].text.value}")
-
-# Output:
-# assistant: Your code passed all the test cases, including corner cases. Well done! The function correctly finds the maximum element in the array.
-
-# Here are the outputs for the test cases:
-# - Test Case 1: `9`
-# - Test Case 2: `None`
-# - Test Case 3: `-1`
-# - Test Case 4: `8`
-# - Test Case 5: `7`
-
-# Is there anything else I can help you with?
-
-```
-
-So our code passed all the tests and our answer seems to be correct.
-
-<h1 id="code">Source Code <a href="#code">#</a></h1>
-
-You can find the source code for this example on: [source code](https://github.com/webtaken/AI-scripts/blob/main/agents/coding-interview-coach.ipynb).
-
-<h1 id="side-project-idea">Side project idea <a href="#side-project-idea">#</a></h1>
-
-So we have built a basic coding interview coach that needs to be improved a lot to become a decent competition to existing products such as [Leetcode](https://leetcode.com/) for example.  
-The basic idea for now is to create a newsletter sending an easy-to-intermediate problem each day to our users by email. With a basic monthly subscription plan we can train a junior dev to tackle its next coding interview. The challenge here is answer the argument: **And what's the difference with other similar sites man 🧐?, there are a lot even for free** (we have to solve that issue).  
-Another idea could be to do an assistant not for coding interviews instead a coach that helps you learn any programming language. We could copy the site [exercism.org](https://exercism.org/)
-and create a complete roadmap for any programming language.  
-Anyway I think I'll go for the newsletter if I have time...  
-Start easy and iterate overtime to add more features, that's the best approach. Hope this post was helpful to you, don't forget to copy the idea or create a new one. The key is not to lose time 🦾.
+Cool advantages

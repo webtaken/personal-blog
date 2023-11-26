@@ -23,7 +23,9 @@ const { frontmatter } = Astro.props;
       />
     )
   }
-  <div class="prose max-w-fit md:prose-md lg:prose-lg dark:prose-invert">
+  <div
+    class="prose prose-img:mx-auto max-w-fit md:prose-md lg:prose-lg dark:prose-invert"
+  >
     <slot />
   </div>
 </Layout>
