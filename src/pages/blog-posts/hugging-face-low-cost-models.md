@@ -158,8 +158,15 @@ You can test API inference endpoints with various other models in the platform d
 Despite the Inference API is free it has a limit rate for requests, and let's no say lies nothing
 in life comes for free. In case you found a set of models that seems very useful to implement in a process of your side-project you can upgrade to the Pro Plan starting in $9 to improve your rate limit.
 
+<h1 id="ideas-and-use-cases">Ideas and Use cases <a href="#ideas-and-use-cases">#</a></h1>
+
+The most powerful models in Hugging Face are related to NLP so you could think in applications of common tasks in this field (but feel free to explore other tasks in the models section).  
+In my case for my side project [GPTube](https://www.gptube.ink/) (🛠️ A still in progress side project) I am using Hugging Face sentiment analysis models for a classification of youtube comments as positive, negative or neutral as a previous step for an entire analysis.  
+You could integrate the same sentiment analysis in other scenarios: for example if you're building a feedback service like [canny.io](https://canny.io/) you could integrate an AI sentiment scorer for your customers so they can verify if its product is doing well.  
+Other scenario where I find useful this model [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) that summarize text is as a AI writing assistant. Nowadays writing concise text is very important for researching, in the work, etc so you could create a tool like Grammarly integrating summarization as a feature.
+
 <h1 id="conclusion">Conclusion <a href="#conclusion">#</a></h1>
 
 Hugging Face provides many models for you to use with its Inference API. It can become one new feature for your side project or even you can base your entire project on top of a model.  
-In next posts we will continue exploring very interesting Hugging Face models to make fun projects.
+In next posts we will continue exploring very interesting Hugging Face models and its applications to make fun projects.
 Anyway continue creating my Indie Creator and don't give up 😉.
