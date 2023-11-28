@@ -8,8 +8,8 @@ descriptionExtended: "In this post I'll show you the power of new OpenAI agents 
 author: "Saul Rojas"
 authorURL: "https://www.linkedin.com/in/saul-rojas-6885b1188/"
 image:
-  url: "https://docs.astro.build/assets/full-logo-light.png"
-  alt: "AI agents post"
+  url: "https://images.openai.com/blob/2014517b-1a80-4b62-bbb6-caa490f69299/introducing-gpts.png?trim=0,0,0,0&width=1400"
+  alt: "OpenAI GPTs"
 tags: ["blogging", "AI", "OpenAI"]
 ---
 

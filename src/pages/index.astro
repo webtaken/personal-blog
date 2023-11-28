@@ -6,6 +6,9 @@ import BlogCard from "../components/BlogCard.astro";
 import SideProjectsCard from "@/components/SideProjectsCard.astro";
 import type { SPConfig } from "@/lib/types";
 let latestPosts = await Astro.glob("./blog-posts/*.md");
+latestPosts.sort(
+  (a, b) => -a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate)
+);
 latestPosts = latestPosts.slice(0, 4);
 
 export const sideProjects: SPConfig[] = [
@@ -29,7 +32,7 @@ export const sideProjects: SPConfig[] = [
   <br />
   <div class="flex items-center">
     <p class="w-4/5">
-      Hello there my name is Saul. I'm a web developer and a partial time <span
+      Hello there my name is Saul. I'm a web developer and a part-time <span
         class="font-bold text-foreground underline"
         ><a href="https://twitter.com/IndieCreatorsHQ">Indie Creator</a></span
       >, I enjoy doing projects and launching them 🚀. That's why I created this
@@ -48,7 +51,7 @@ export const sideProjects: SPConfig[] = [
   </div>
 
   <div class="mt-8">
-    <h1 class="text-4xl font-sans">Latest blogs</h1>
+    <h1 class="text-4xl font-sans">Latest Posts</h1>
     <div class="my-4 grid grid-cols-1 md:grid-cols-3 gap-2">
       <div
         class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2"
