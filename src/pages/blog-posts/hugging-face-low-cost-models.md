@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 id: post-3
 title: "Hugging Face 🤗: Low cost AI models to boost your side project"
-pubDate: 2023-11-23T23:47:00Z
+pubDate: 2023-11-28T10:00:00Z
 description: "Boost your side project with AI models from the largest AI community around the world"
 descriptionExtended: "In this post I'll show you how to boost your side project with AI models from hugging face, the largest internet repository of AI models."
 author: "Saul Rojas"
@@ -26,7 +26,7 @@ Literally in this place you can find any model related to the most common tasks 
 
 But for me the real power of Hugging Face and its huge amount of models is that you can use them using a simple API call!
 <a href="https://huggingface.co/inference-endpoints" target="_blank">Inference Endpoints</a> is a service that let you use different models deployed on Hugging Face infrastructure only making a simple API call using a token.  
-So let's start with setup process and see how you can start integrating AI models as features
+So let's start with the setup process and see how you can start integrating AI models as features
 is your side project
 
 <h1 id="setup">Getting Setup <a href="#setup">#</a></h1>
@@ -48,14 +48,14 @@ Ok that's cool but let's go to the point of this post.
 
 <h1 id="inference-api">Inference API <a href="#inference-api">#</a></h1>
 
-First let's setup a token to use Inference API to do that <a href="https://huggingface.co/settings/tokens" target="_blank">go into your Hugging Face profile settings</a> and generate a new API.
+First let's setup a token to use Inference API to do that <a href="https://huggingface.co/settings/tokens" target="_blank">go into your Hugging Face profile settings</a> and generate a new API token.
 You should see a token hf_xxxxx (old tokens are api_XXXXXXXX or api_org_XXXXXXX).  
 Now let's go back to the <a href="https://huggingface.co/lxyuan/distilbert-base-multilingual-cased-sentiments-student" target="_blank">distilbert</a> model page
-and test out if our token works correctly, you'll see a section with various options
+and test out if our token works correctly. You'll see a section with various options
 
 ![Options](../../assets/images/blogs/post-3/options.webp)
 
-Select Deploy and then the option **Inference API**, you'll see a panel with examples from
+Select `Deploy` and then the option **Inference API**, you'll see a panel with examples from
 python, javascript and CURL, pick whatever you want. I'll choose python to test it with code.
 
 ```python
@@ -101,6 +101,8 @@ That outputs
   ]
 ]
 ```
+
+:) That's cool we made our first call to Inference Endpoints.
 
 > Note: some models need to be loaded before sending any response so you could receive an initial error `model loading...`.
 
@@ -163,7 +165,7 @@ in life comes for free. In case you found a set of models that seems very useful
 The most powerful models in Hugging Face are related to NLP so you could think in applications of common tasks in this field (but feel free to explore other tasks in the models section).  
 In my case for my side project [GPTube](https://www.gptube.ink/) (🛠️ A still in progress side project) I am using Hugging Face sentiment analysis models for a classification of youtube comments as positive, negative or neutral as a previous step for an entire analysis.  
 You could integrate the same sentiment analysis in other scenarios: for example if you're building a feedback service like [canny.io](https://canny.io/) you could integrate an AI sentiment scorer for your customers so they can verify if its product is doing well.  
-Other scenario where I find useful this model [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) that summarize text is as a AI writing assistant. Nowadays writing concise text is very important for researching, in the work, etc so you could create a tool like Grammarly integrating summarization as a feature.
+Other scenario where I find useful this model [bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) that summarize text is as an AI writing assistant. Nowadays writing concise text is very important for researching, in the work, etc so you could create a tool like Grammarly integrating summarization as a feature.
 
 <h1 id="conclusion">Conclusion <a href="#conclusion">#</a></h1>
 
