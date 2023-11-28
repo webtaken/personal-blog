@@ -151,6 +151,15 @@ Outputs:
 
 You can test API inference endpoints with various other models in the platform depending on your needs.
 
+> Source code: [https://github.com/webtaken/AI-scripts/blob/main/hugging-face/hugging-face-inference.ipynb](https://github.com/webtaken/AI-scripts/blob/main/hugging-face/hugging-face-inference.ipynb).
+
 <h1 id="restrictions">Restrictions <a href="#restrictions">#</a></h1>
 
-Cool advantages
+Despite the Inference API is free it has a limit rate for requests, and let's no say lies nothing
+in life comes for free. In case you found a set of models that seems very useful to implement in a process of your side-project you can upgrade to the Pro Plan starting in $9 to improve your rate limit.
+
+<h1 id="conclusion">Conclusion <a href="#conclusion">#</a></h1>
+
+Hugging Face provides many models for you to use with its Inference API. It can become one new feature for your side project or even you can base your entire project on top of a model.  
+In next posts we will continue exploring very interesting Hugging Face models to make fun projects.
+Anyway continue creating my Indie Creator and don't give up 😉.
