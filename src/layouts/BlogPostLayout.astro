@@ -1,8 +1,9 @@
 ---
 import Layout from "./Layout.astro";
 import { formatDate } from "../lib/utils";
-
+import BlogCard from "@/components/BlogCard.astro";
 const { frontmatter } = Astro.props;
+let posts = await Astro.glob("../pages/blog-posts/*.md");
 ---
 
 <Layout title={frontmatter.title}>
@@ -17,7 +18,7 @@ const { frontmatter } = Astro.props;
   {
     frontmatter.image && (
       <img
-        class="object-cover border p-2 rounded-lg mx-auto mb-2 w-3/4 h-80"
+        class="object-scale-down border p-2 rounded-lg mx-auto mb-2 w-3/4 h-80"
         src={frontmatter.image.url}
         alt={frontmatter.image.alt}
       />
@@ -28,4 +29,31 @@ const { frontmatter } = Astro.props;
   >
     <slot />
   </div>
+
+  {
+    frontmatter.related && (
+      <div class="my-5">
+        <p class="text-2xl py-2 font-bold">Related articles</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+          {frontmatter.related.map((postId: string) => {
+            const postFound = posts.find(
+              (post) => post.frontmatter.id == postId
+            );
+            if (postFound) {
+              return (
+                <BlogCard
+                  title={postFound?.frontmatter.title}
+                  description={postFound?.frontmatter.description}
+                  body={postFound?.frontmatter.descriptionExtended}
+                  url={postFound?.url || "/"}
+                  tags={postFound?.frontmatter.tags}
+                />
+              );
+            }
+            return null;
+          })}
+        </div>
+      </div>
+    )
+  }
 </Layout>
