@@ -2,5 +2,5 @@ export interface SPConfig {
   title: string;
   description: string;
   url: string;
-  status: "in progress 🔨" | "launched 🚀";
+  status: "in progress 🔨" | "launched 🚀" | "discontinued 🔐";
 }
