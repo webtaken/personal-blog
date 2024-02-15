@@ -23,6 +23,16 @@ But that's not all, if some of you work in a medium-large teams communication be
 
 Ok that's too much words for simple article on how to use HTMX let's start with the code 🦾.
 
+# Table of Contents
+
+1. [Tech stack setup & Introduction](#setup)
+2. [Project structure](#structure)
+3. [Rendering the Home page](#home-page)
+4. [Rendering the SignUp page](#signup-page)
+5. [Extra use case for HTMX](#htmx-extra)
+6. [Source Code](#source-code)
+7. [Conclusion](#conclusion)
+
 <h1 id="setup">Tech stack setup & Introduction <a href="#setup">#</a></h1>
 We'll use Go with the echo framework and Templ to build a basic register form with extra interactivity for real time validations. On a folder start new go project typing:
 
