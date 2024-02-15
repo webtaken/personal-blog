@@ -28,6 +28,23 @@ let posts = await Astro.glob("../pages/blog-posts/*.md");
     class="prose prose-img:mx-auto max-w-fit md:prose-md lg:prose-lg dark:prose-invert"
   >
     <slot />
+    <div class="flex items-center gap-x-2">
+      <p class="text-3xl font-bold">
+        In case you found this post useful 😃 consider:
+      </p>
+      <script
+        type="text/javascript"
+        src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button"
+        data-slug="sauldev"
+        data-color="#FFDD00"
+        data-emoji="☕"
+        data-font="Inter"
+        data-text="Buy me a coffee"
+        data-outline-color="#000000"
+        data-font-color="#000000"
+        data-coffee-color="#ffffff"></script>
+    </div>
   </div>
 
   {
